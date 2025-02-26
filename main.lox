@@ -1,0 +1,3 @@
+// comment
+/* comment block/* comment block 2 */*/
+var x = 3;
