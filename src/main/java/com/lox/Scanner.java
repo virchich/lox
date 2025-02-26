@@ -101,6 +101,7 @@ public class Scanner {
             case '/':
                 // Comment goes until the end of the line.
                 if (match('/')) while (peek() != '\n' && !isAtEnd()) advance();
+                else if (match('*')) commentBlock();
                 else addToken(SLASH);
                 break;
             case ' ':
@@ -118,6 +119,31 @@ public class Scanner {
                 else if (isAlpha(c)) identifier();
                 else Lox.error(line, "Unexpected character '" + c + "'");
                 break;
+        }
+    }
+
+    private void commentBlock() {
+        int openedBlocks = 1;
+
+        while (!(peek() == '*' && peekNext() == '/') && !isAtEnd()) {
+            if (peek() == '\n') line++;
+            if (peek() == '/' && peekNext() == '*') openedBlocks++;
+            advance();
+        }
+
+        for (int i = 0; i < openedBlocks; i++) {
+            if (peek() == '\n') {
+                line++;
+                advance();
+            }
+
+            if (peek() != '*' && peekNext() != '/') {
+                Lox.error(line, "Unexpected end of comment block section");
+                return;
+            }
+
+            advance();
+            advance();
         }
     }
 
