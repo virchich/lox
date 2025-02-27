@@ -32,7 +32,7 @@ public class AstPrinter implements Expr.Visitor<String> {
     public String visitLiteralExpr(Expr.Literal expr) {
         if (expr.value == null) return "nil";
 
-        return expr.value.toString();
+        return expr.value + "";
     }
 
     @Override
