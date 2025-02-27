@@ -1,3 +1,4 @@
 // comment
 /* comment block/* comment block 2 */*/
 var x = 3;
+var name = "Bob Vance";
