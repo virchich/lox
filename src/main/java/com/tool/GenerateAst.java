@@ -32,7 +32,7 @@ public class GenerateAst {
         writer.println();
         writer.println("import java.util.List;");
         writer.println();
-        writer.println("abstract class " + baseName + " {");
+        writer.println("public abstract class " + baseName + " {");
 
         defineVisitor(writer, baseName, types);
 
