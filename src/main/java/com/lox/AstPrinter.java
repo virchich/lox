@@ -40,11 +40,11 @@ public class AstPrinter implements Expr.Visitor<String> {
         return parenthesize(expr.operator.lexeme, expr.right);
     }
 
-    private String parenthesize(String name, Expr... exprs) {
+    protected String parenthesize(String name, Expr... expressions) {
         StringBuilder builder = new StringBuilder();
 
         builder.append("(").append(name);
-        for (Expr expr : exprs) {
+        for (Expr expr : expressions) {
             builder.append(" ");
             builder.append(expr.accept(this));
         }
