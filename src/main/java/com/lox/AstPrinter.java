@@ -45,7 +45,7 @@ public class AstPrinter implements Expr.Visitor<String> {
 
         builder.append("(").append(name);
         for (Expr expr : exprs) {
-            builder.append(", ").append(expr);
+            builder.append(" ");
             builder.append(expr.accept(this));
         }
         builder.append(")");
