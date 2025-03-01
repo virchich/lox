@@ -21,7 +21,21 @@ public class Parser {
     }
 
     private Expr expression() {
-        return equality();
+        return ternary();
+    }
+
+    private Expr ternary() {
+        Expr expr = equality();
+
+        if (match(QUESTION)) {
+            Expr condition = expr;
+            Expr ifTrue = primary();
+            consume(COLON, "Expected ':' after ternary.");
+            Expr ifFalse = primary();
+            expr = new Expr.Ternary(condition, ifTrue, ifFalse);
+        }
+
+        return expr;
     }
 
     private Expr equality() {
@@ -95,7 +109,7 @@ public class Parser {
             return new Expr.Grouping(expr);
         }
 
-        throw error(peek(), "Expect expression.");
+        throw error(peek(), "Expected expression.");
     }
 
     private boolean match(TokenType... types) {
