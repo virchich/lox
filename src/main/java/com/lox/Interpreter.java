@@ -75,6 +75,14 @@ public class Interpreter implements Expr.Visitor<Object> {
             case PLUS:
                 if (left instanceof Double && right instanceof Double) return (double) left + (double) right;
                 if (left instanceof String && right instanceof String) return left + (String) right;
+                if (left instanceof String && right instanceof Double) {
+                    if ((double) right % 1 == 0) return (String) left + Math.round((double) right);
+                    return (String) left + right;
+                }
+                if (left instanceof Double && right instanceof String) {
+                    if ((double) left % 1 == 0) return Math.round((double) left) + (String) right;
+                    return left + (String) right;
+                }
                 throw new RuntimeError(expr.operator, "Operands must be two numbers or two strings.");
             case SLASH:
                 checkNumberOperands(expr.operator, left, right);
