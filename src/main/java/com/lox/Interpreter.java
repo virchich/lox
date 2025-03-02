@@ -50,17 +50,21 @@ public class Interpreter implements Expr.Visitor<Object> {
 
         switch (expr.operator.type) {
             case GREATER:
-                checkNumberOperands(expr.operator, left, right);
-                return (double) left > (double) right;
+                ComparisonType g = checkComparisonOperands(expr.operator, left, right);
+                if (g == ComparisonType.NUMBERS) return (double) left > (double) right;
+                return ((String) left).charAt(0) > ((String) right).charAt(0);
             case GREATER_EQUAL:
-                checkNumberOperands(expr.operator, left, right);
-                return (double) left >= (double) right;
+                ComparisonType ge = checkComparisonOperands(expr.operator, left, right);
+                if (ge == ComparisonType.NUMBERS) return (double) left >= (double) right;
+                return ((String) left).charAt(0) >= ((String) right).charAt(0);
             case LESS:
-                checkNumberOperands(expr.operator, left, right);
-                return (double) left < (double) right;
+                ComparisonType l = checkComparisonOperands(expr.operator, left, right);
+                if (l == ComparisonType.NUMBERS) return (double) left < (double) right;
+                return ((String) left).charAt(0) < ((String) right).charAt(0);
             case LESS_EQUAL:
-                checkNumberOperands(expr.operator, left, right);
-                return (double) left <= (double) right;
+                ComparisonType le = checkComparisonOperands(expr.operator, left, right);
+                if (le == ComparisonType.NUMBERS) return (double) left <= (double) right;
+                return ((String) left).charAt(0) <= ((String) right).charAt(0);
             case BANG_EQUAL:
                 return !isEqual(left, right);
             case EQUAL_EQUAL:
@@ -124,4 +128,13 @@ public class Interpreter implements Expr.Visitor<Object> {
         if (left instanceof Double && right instanceof Double) return;
         throw new RuntimeError(operator, "Operands must be numbers.");
     }
+
+    private ComparisonType checkComparisonOperands(Token operator, Object left, Object right) {
+        if (left instanceof Double && right instanceof Double) return ComparisonType.NUMBERS;
+        if (left instanceof String && right instanceof String)
+            if (((String) left).length() == 1 && ((String) right).length() == 1) return ComparisonType.CHARACTERS;
+        throw new RuntimeError(operator, "Comparison operands must be either numbers or single character strings.");
+    }
+
+    private enum ComparisonType {NUMBERS, CHARACTERS}
 }
