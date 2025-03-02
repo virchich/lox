@@ -108,7 +108,7 @@ public class Interpreter implements Expr.Visitor<Object> {
 
     @Override
     public Object visitTernaryExpr(Expr.Ternary expr) {
-        if (isTruthy(visitBinaryExpr((Expr.Binary) expr.condition))) return evaluate(expr.ifTrue);
+        if (isTruthy(evaluate(expr.condition))) return evaluate(expr.ifTrue);
 
         return evaluate(expr.ifFalse);
     }
