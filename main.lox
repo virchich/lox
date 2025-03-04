@@ -1,4 +1,9 @@
 // comment
 /* comment block/* comment block 2 */*/
-var x = 3;
-var name = "Bob Vance";
+// var x = 3;
+// var name = "Bob Vance";
+
+print "one";
+print true;
+print 2 + 1;
+print 33+11+(1+5)*3;

@@ -1,6 +1,10 @@
 # Lox Grammar
 
 ```text
+program     -> statement* EOF ;
+statement   -> exprStmt | printStmt ;
+exprStmt    -> expression ";" ;
+printStmt   -> "print" expression ";" ;
 expression  -> ternary ;
 ternary     -> equality ( "?" primary ":" primary )? ;
 equality    -> comparison ( ( "!=" | "==" ) comparison )* ;
