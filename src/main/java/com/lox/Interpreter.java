@@ -2,6 +2,7 @@ package com.lox;
 
 import java.util.List;
 
+// TODO - add support for REPL printing expressions to the terminal.
 public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
     private Environment environment = new Environment();
 
