@@ -64,7 +64,7 @@ public class Parser {
     }
 
     private Expr assignment() {
-        Expr expr = equality(); // TODO - use ternary
+        Expr expr = ternary();
 
         if (match(EQUAL)) {
             Token equals = previous();

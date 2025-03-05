@@ -15,3 +15,10 @@ print a + b;
 var new_one;
 new_one = 333;
 print new_one + " " + (33 - 3);
+
+var x = 3 + 10;
+var y = x > 5 ? 100 : 0;
+print "WITH TERNARY: " + y;
+
+print zz;
+
