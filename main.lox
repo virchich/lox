@@ -11,3 +11,7 @@ print "RESULT: " + (33+11+(1+5)*3);
 var a = 1;
 var b = 2;
 print a + b;
+
+var new_one;
+new_one = 333;
+print new_one + " " + (33 - 3);
