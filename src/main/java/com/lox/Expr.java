@@ -13,6 +13,8 @@ public abstract class Expr {
         R visitUnaryExpr(Unary expr);
 
         R visitTernaryExpr(Ternary expr);
+
+        R visitVariableExpr(Variable expr);
     }
 
     public static class Binary extends Expr {
@@ -30,11 +32,6 @@ public abstract class Expr {
         <R> R accept(Visitor<R> visitor) {
             return visitor.visitBinaryExpr(this);
         }
-
-        @Override
-        public String toString() {
-            return left + " " + operator.lexeme + " " + right;
-        }
     }
 
     public static class Grouping extends Expr {
@@ -48,11 +45,6 @@ public abstract class Expr {
         <R> R accept(Visitor<R> visitor) {
             return visitor.visitGroupingExpr(this);
         }
-
-        @Override
-        public String toString() {
-            return "(" + expression + ")";
-        }
     }
 
     public static class Literal extends Expr {
@@ -65,11 +57,6 @@ public abstract class Expr {
         @Override
         <R> R accept(Visitor<R> visitor) {
             return visitor.visitLiteralExpr(this);
-        }
-
-        @Override
-        public String toString() {
-            return value + "";
         }
     }
 
@@ -86,11 +73,6 @@ public abstract class Expr {
         <R> R accept(Visitor<R> visitor) {
             return visitor.visitUnaryExpr(this);
         }
-
-        @Override
-        public String toString() {
-            return operator.lexeme + right;
-        }
     }
 
     public static class Ternary extends Expr {
@@ -98,7 +80,7 @@ public abstract class Expr {
         final Expr ifTrue;
         final Expr ifFalse;
 
-        public Ternary(Expr condition, Expr ifTrue, Expr ifFalse) {
+        Ternary(Expr condition, Expr ifTrue, Expr ifFalse) {
             this.condition = condition;
             this.ifTrue = ifTrue;
             this.ifFalse = ifFalse;
@@ -108,10 +90,18 @@ public abstract class Expr {
         <R> R accept(Visitor<R> visitor) {
             return visitor.visitTernaryExpr(this);
         }
+    }
+
+    public static class Variable extends Expr {
+        final Token name;
+
+        Variable(Token name) {
+            this.name = name;
+        }
 
         @Override
-        public String toString() {
-            return condition + " ? " + ifTrue + " : " + ifFalse;
+        <R> R accept(Visitor<R> visitor) {
+            return visitor.visitVariableExpr(this);
         }
     }
 }
