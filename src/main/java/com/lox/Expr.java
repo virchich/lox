@@ -38,6 +38,7 @@ public abstract class Expr {
         final Expr left;
         final Token operator;
         final Expr right;
+
         Binary(Expr left, Token operator, Expr right) {
             this.left = left;
             this.operator = operator;
@@ -95,6 +96,7 @@ public abstract class Expr {
         final Expr condition;
         final Expr ifTrue;
         final Expr ifFalse;
+
         Ternary(Expr condition, Expr ifTrue, Expr ifFalse) {
             this.condition = condition;
             this.ifTrue = ifTrue;

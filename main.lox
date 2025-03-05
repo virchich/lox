@@ -8,9 +8,9 @@ print true;
 print 2 + 1;
 print "RESULT: " + (33+11+(1+5)*3);
 
-var a = 1;
-var b = 2;
-print a + b;
+var aa = 1;
+var bb = 2;
+print aa + bb;
 
 var new_one;
 new_one = 333;
@@ -19,6 +19,26 @@ print new_one + " " + (33 - 3);
 var x = 3 + 10;
 var y = x > 5 ? 100 : 0;
 print "WITH TERNARY: " + y;
+
+var a = "global a";
+var b = "global b";
+var c = "global c";
+{
+  var a = "outer a";
+  var b = "outer b";
+  {
+    var a = "inner a";
+    print a;
+    print b;
+    print c;
+  }
+  print a;
+  print b;
+  print c;
+}
+print a;
+print b;
+print c;
 
 print zz;
 
