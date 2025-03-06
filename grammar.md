@@ -11,7 +11,9 @@ ifStmt      -> "if" "(" expression ")" statement
 printStmt   -> "print" expression ";" ;
 block       -> "{" declaration* "}" ;
 expression  -> assignment ;
-assignment  -> IDENTIFIER "=" assignment | ternary ;
+assignment  -> IDENTIFIER "=" assignment | logic_or | ternary ;
+logic_or    -> logic_and ( "or" logic_and )* ;
+logic_and   -> equality ( "and" equality )* ;
 ternary     -> equality ( "?" primary ":" primary )? ;
 equality    -> comparison ( ( "!=" | "==" ) comparison )* ;
 comparison  -> term ( ( ">" | ">=" | "<" | "<=" ) term )* ;
