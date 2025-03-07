@@ -4,12 +4,13 @@
 program     -> declaration* EOF ;
 declaration -> varDecl | statement ;
 varDecl     -> "var" IDENTIFIER ( "=" expression )? ";" ;
-statement   -> exprStmt | ifStmt | printStmt | whileStmt | block ;
-whileStmt   -> "while" "(" expression ")" statement ;
+statement   -> exprStmt | forStmt | ifStmt | printStmt | whileStmt | block ;
+forStmt     -> "for" "(" ( varDecl | exprStmt | ";" ) expression? ";" expression? ")" statement ;
 exprStmt    -> expression ";" ;
 ifStmt      -> "if" "(" expression ")" statement
                ( "else" statement )? ;
 printStmt   -> "print" expression ";" ;
+whileStmt   -> "while" "(" expression ")" statement ;
 block       -> "{" declaration* "}" ;
 expression  -> assignment ;
 assignment  -> IDENTIFIER "=" assignment | logic_or | ternary ;
