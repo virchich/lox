@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 // TODO - add support for REPL printing expressions to the terminal.
+// TODO - add support for lambda function
+// TODO - add support for for loops to exit early
 public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
     final Environment globals = new Environment();
     private Environment environment = globals;
