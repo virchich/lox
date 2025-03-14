@@ -1,44 +1,11 @@
-// comment
-/* comment block/* comment block 2 */*/
-var name = "Bob Vance";
-print name;
+var a = "global";
 
-print "one";
-print true;
-print 2 + 1;
-print "RESULT: " + (33+11+(1+5)*3);
-
-var aa = 1;
-var bb = 2;
-print aa + bb;
-
-var new_one;
-new_one = 333;
-print new_one + " " + (33 - 3);
-
-var x = 3 + 10;
-var y = x > 5 ? 100 : 0;
-print "WITH TERNARY: " + y;
-
-var a = "global a";
-var b = "global b";
-var c = "global c";
 {
-  var a = "outer a";
-  var b = "outer b";
-  {
-    var a = "inner a";
+  fun showA() {
     print a;
-    print b;
-    print c;
   }
-  print a;
-  print b;
-  print c;
+
+  showA();
+  var a = "block";
+  showA();
 }
-print a;
-print b;
-print c;
-
-print zz;
-
