@@ -18,7 +18,7 @@ returnStmt  -> "return" expression? ";" ;
 whileStmt   -> "while" "(" expression ")" statement ;
 block       -> "{" declaration* "}" ;
 expression  -> assignment ;
-assignment  -> IDENTIFIER "=" assignment | logic_or | ternary ;
+assignment  -> ( call "." )? IDENTIFIER "=" assignment | logic_or | ternary ;
 logic_or    -> logic_and ( "or" logic_and )* ;
 logic_and   -> equality ( "and" equality )* ;
 ternary     -> equality ( "?" primary ":" primary )? ;
@@ -27,7 +27,7 @@ comparison  -> term ( ( ">" | ">=" | "<" | "<=" ) term )* ;
 term        -> factor ( ( "-" | "+" ) factor )* ;
 factor      -> unary ( ( "/" | "*" ) unary )* ;
 unary       -> ( "-" | "!" ) unary | call ;
-call        -> primary ( "(" arguments? ")" )* ;
+call        -> primary ( "(" arguments? ")" | "." IDENTIFIER )* ;
 arguments   -> expression ( "," expression )* ;
 primary     -> NUMBER | STRING | "true" | "false" | "nil" | "(" expression ")" | IDENTIFIER ;
 ```
