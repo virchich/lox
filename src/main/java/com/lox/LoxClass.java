@@ -3,6 +3,8 @@ package com.lox;
 import java.util.List;
 import java.util.Map;
 
+// TODO: Add static methods support (extend LoxInstance)
+// TODO: Add support for getters and setters
 public class LoxClass implements LoxCallable {
     final String name;
     private final Map<String, LoxFunction> methods;
