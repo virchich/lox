@@ -22,6 +22,8 @@ public abstract class Expr {
 
         R visitSetExpr(Set expr);
 
+        R visitSuperExpr(Super expr);
+
         R visitThisExpr(This expr);
 
         R visitUnaryExpr(Unary expr);
@@ -50,7 +52,6 @@ public abstract class Expr {
         final Expr left;
         final Token operator;
         final Expr right;
-
         Binary(Expr left, Token operator, Expr right) {
             this.left = left;
             this.operator = operator;
@@ -67,7 +68,6 @@ public abstract class Expr {
         final Expr callee;
         final Token paren;
         final List<Expr> arguments;
-
         Call(Expr callee, Token paren, List<Expr> arguments) {
             this.callee = callee;
             this.paren = paren;
@@ -125,7 +125,6 @@ public abstract class Expr {
         final Expr left;
         final Token operator;
         final Expr right;
-
         Logical(Expr left, Token operator, Expr right) {
             this.left = left;
             this.operator = operator;
@@ -142,7 +141,6 @@ public abstract class Expr {
         final Expr object;
         final Token name;
         final Expr value;
-
         Set(Expr object, Token name, Expr value) {
             this.object = object;
             this.name = name;
@@ -152,6 +150,21 @@ public abstract class Expr {
         @Override
         <R> R accept(Visitor<R> visitor) {
             return visitor.visitSetExpr(this);
+        }
+    }
+
+    public static class Super extends Expr {
+        final Token keyword;
+        final Token method;
+
+        Super(Token keyword, Token method) {
+            this.keyword = keyword;
+            this.method = method;
+        }
+
+        @Override
+        <R> R accept(Visitor<R> visitor) {
+            return visitor.visitSuperExpr(this);
         }
     }
 
@@ -187,7 +200,6 @@ public abstract class Expr {
         final Expr condition;
         final Expr ifTrue;
         final Expr ifFalse;
-
         Ternary(Expr condition, Expr ifTrue, Expr ifFalse) {
             this.condition = condition;
             this.ifTrue = ifTrue;

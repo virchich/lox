@@ -1,11 +1,15 @@
-var a = "global";
-
-{
-  fun showA() {
-    print a;
+class D {
+  cook() {
+    print "Fry until golden brown.";
   }
-
-  showA();
-  var a = "block";
-  showA();
 }
+
+class B < D {
+	cook() {
+		super.cook();
+		print "Pipe full of custard and coat with chocolate.";
+	}
+}
+
+var b = B();
+b.cook();
